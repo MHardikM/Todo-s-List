@@ -1,0 +1,30 @@
+<div class="container w-50">
+<form [formGroup]="loginForm" (ngSubmit)="login()" >
+    <h2>todo list</h2>
+    <div class="mb-3">
+      <label for="title"  class="form-label">Title</label>
+      <input type="text" [(ngModel)]="title" class="form-control" formControlName="title"   name="title" id="title"> 
+    </div>
+    <div class="mb-3">
+      <label for="desc" class="form-label">Description</label>
+      <input type="text"[(ngModel)]="desc" class="form-control" formControlName="desc" name="desc" id="desc">
+     
+    </div>
+    <button [hidden]="isforupdate"  type="submit" [disabled]="loginForm.invalid" class="btn btn-primary" (click)="addtodo()" >Addtodo</button>
+
+    <button type="submit" [hidden]='!isforupdate' [disabled]="loginForm.invalid"  class="btn btn-secondary mx-3" name ="updatebtn" (click)="update(this.todo)" >Update</button>
+  </form>
+</div>
+  <div class="container w-50 my-3">
+    <h3 class="my-4">your todo's</h3>
+      <div *ngFor="let item of todos;index as i"  class="card-item bor d-inline-block"> 
+        <h5 [ngClass]="{'strike':this.todos[i].active}"> Title : {{item.title}} </h5>
+        <h5 [ngClass]="{'strike': this.todos[i].active}"> Description: {{item.desc}} </h5>
+        <div class="mt-2 form-check">
+          <input type="checkbox" class="form-check-input" id="chk"  (click)="toggle(i)">
+          <label class="form-check-label" id="che"  for="exampleCheck"> Mark As done</label>
+        </div>
+        <button type="submit" class="btn btn-sm btn-danger"  (click)="deletetodo(i)">delete</button>
+        <button  type="submit" class="btn mx-3 btn-sm btn-success" (click)="edit(i)">Edit </button>
+      </div>
+      </div>
